@@ -55,3 +55,8 @@ Bitcoin's fixed lot (0.0005 BTC) can grow too big for its sleeve if the price ri
 ## Cloud mode (no PC needed)
 Upload mcx_bundle.py and .github/workflows/paper.yml to a GitHub repository. GitHub runs the agency every morning (06:00 India time), commits the state, and writes PAPER_REPORT.md. Known MCX prices in config_multi.json ("calibration") scale the proxy prices automatically; edit them there if you want fresher anchors.
 If Yahoo Finance blocks GitHub's servers, the runner log (logs/run.log) says so and the next run retries.
+
+## Intraday checks and profit alerts (cloud)
+paper.yml also runs every 30 minutes on weekdays from 08:30 to midnight India time. Strategy decisions still use completed daily bars; the extra runs mark open positions to the latest proxy price and refresh PAPER_REPORT.md.
+When total paper profit reaches a new Rs150 step for the day (config_multi.json: alerts.profit_step_inr), or the risk halt triggers, alert.py opens a GitHub issue that @mentions the repo owner. The GitHub app turns that into a phone notification (set the repo to Watch, All activity or Issues).
+GitHub's schedule is best-effort and can run late.

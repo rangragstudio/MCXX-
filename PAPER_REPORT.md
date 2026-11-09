@@ -1,9 +1,10 @@
 # Paper portfolio report
 
-Updated: 2026-11-09 04:51 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
+Updated: 2026-11-09 04:59 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
 
 ## Total money now: Rs15,000.00
 
+- Based on the last daily close (no fresh live price).
 - Profit / loss: **+Rs0.00 (+0.00%)** since start with Rs15,000
 - Day 0 of 60 (MCX trading days). Data through 2026-11-08.
 - Closed trades: 0. Costs and tax paid: Rs0.00. Risk vetoes/blocks: 0. Halted: no.
@@ -58,4 +59,5 @@ No trades yet. Staying in cash is a valid result.
 2026-11-09T04:50:54 portfolio created: {"GOLDPETAL": 9000, "SILVER100": 0, "CRUDEOILM": 0, "BTC": 6000}
 2026-11-09T04:50:58 GOLDPETAL started 2026-11-08 enabled none
 2026-11-09T04:51:00 BTC started 2026-11-07 enabled ['trend_ema20_50']
+2026-11-09T04:59:22 data: {"GOLDPETAL": 6574, "SILVER100": 6575, "CRUDEOILM": 6582, "BTC": 4435}
 ```
