@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCX Agency · Live</title>
+<style>
+:root{--bg:#0a0e13;--panel:#111821;--line:#1e2833;--tx:#d5dbe3;--mu:#7d8a99;--g:#2ecc71;--r:#ef5350;--a:#f5a524;--b:#5aa9ff;--p:#a78bfa;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:13px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:12px}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.brand{font:700 15px var(--mono);letter-spacing:.5px}.brand small{color:var(--mu);font-weight:400;margin-left:8px}
+.pill{font:600 11px var(--mono);padding:3px 9px;border-radius:99px;border:1px solid var(--line)}
+.ok{color:var(--g);border-color:#1f5a38}.bad{color:var(--r);border-color:#6a2a2a}.warn{color:var(--a);border-color:#6a4d12}.blue{color:var(--b);border-color:#244a73}
+.banner{margin-top:8px;padding:6px 12px;border-radius:8px;background:#2a2108;border:1px solid #6a4d12;color:var(--a);font:12px var(--mono)}
+.grid{display:grid;gap:12px;margin-top:12px;grid-template-columns:repeat(12,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+@media(max-width:1100px){.c3,.c4,.c5,.c6,.c7,.c8{grid-column:span 12}}
+h2{margin:0 0 8px;font:700 11px var(--mono);letter-spacing:.8px;color:var(--mu);text-transform:uppercase;display:flex;justify-content:space-between}
+.big{font:600 34px var(--mono);letter-spacing:-.5px}.sub{color:var(--mu);font:11px var(--mono)}
+.kv{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}.kv div b{display:block;font:600 15px var(--mono)}.kv div span{color:var(--mu);font:10px var(--mono);text-transform:uppercase}
+.bar{height:8px;border-radius:5px;background:#1a232e;overflow:hidden;margin:3px 0 9px}.bar i{display:block;height:100%}
+.row{display:flex;justify-content:space-between;font:11px var(--mono);color:var(--mu)}
+svg{width:100%;height:auto;display:block}.tick{fill:var(--mu);font:10px var(--mono)}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.tile{border-radius:7px;padding:8px 4px;text-align:center;font:600 12px var(--mono);border:1px solid var(--line)}.tile small{display:block;font-weight:400;font-size:10px;opacity:.85}
+.t-g{background:#12301f;color:#7ee2a8;border-color:#1f5a38}.t-r{background:#3a1717;color:#f19c9a;border-color:#6a2a2a}.t-n{background:#161e28;color:var(--mu)}.t-w{background:#33260a;color:#f5c363;border-color:#6a4d12}
+table{width:100%;border-collapse:collapse;font:11px var(--mono)}th{color:var(--mu);text-align:left;font-weight:500;padding:4px 6px;border-bottom:1px solid var(--line)}td{padding:5px 6px;border-bottom:1px solid #161e28}
+.log{height:300px;overflow:auto;font:11px/1.5 var(--mono);background:#0b1118;border-radius:8px;padding:8px}.log div{white-space:pre-wrap;word-break:break-word}
+.L-RESEARCH{color:var(--b)}.L-QUANT{color:var(--p)}.L-CIO{color:var(--a)}.L-RISK{color:var(--r)}.L-ORDER{color:#7ee2a8}.L-BROKER{color:var(--tx)}
+button{background:#1b2633;color:var(--tx);border:1px solid #2b3a4b;border-radius:8px;padding:6px 12px;font:600 11px var(--mono);cursor:pointer}button:hover{background:#243245}
+.edge{fill:none;stroke:#2d3b4c;stroke-width:1.4;stroke-dasharray:3 7;animation:dash 1.4s linear infinite}.edge.hot{stroke:var(--g)}.edge.cold{stroke:#3a4656}.edge.stop{stroke:var(--r)}
+@keyframes dash{to{stroke-dashoffset:-20}}@media(prefers-reduced-motion:reduce){.edge{animation:none}}
+.node rect{fill:#0f1620;stroke:#2b3a4b;stroke-width:1.2}.node.on rect{stroke:var(--g)}.node.off rect{stroke:#3a4656;opacity:.75}.node.alert rect{stroke:var(--r)}.node.warn rect{stroke:var(--a)}
+.node .t{fill:var(--tx);font:700 11px var(--mono)}.node .s{fill:var(--mu);font:10px var(--mono)}
+</style></head><body><div class="wrap">
+<header>
+  <div class="brand">MCX AGENCY<small>paper trading · Gold Petal</small></div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span class="pill blue" id="daytag">DAY –/–</span><span class="pill" id="status">…</span><span class="pill" id="conn">connecting</span>
+    <span class="sub" id="clock"></span><button id="runbtn">Update now</button>
+  </div>
+</header>
+<div id="banner"></div>
+<div class="grid" id="topgrid">
+  <div class="card c12" id="pfcard" style="display:none"><h2>Portfolio · all assets together <span id="pfmode" class="sub"></span></h2>
+    <div style="display:flex;flex-wrap:wrap;gap:18px">
+      <div style="flex:0 0 280px"><div class="sub">TOTAL MONEY NOW (paper)</div><div class="big" id="pfeq">–</div><div class="big" style="font-size:20px" id="pfpnl">–</div>
+        <div class="kv"><div><b id="pfcap">–</b><span>Started with</span></div><div><b id="pftr">–</b><span>Trades</span></div><div><b id="pfwr">–</b><span>Win rate</span></div><div><b id="pfcost">–</b><span>Costs + tax</span></div></div></div>
+      <div style="flex:1 1 380px;min-width:260px"><svg id="pfchart" viewBox="0 0 640 180"></svg><div class="row"><span style="color:var(--g)">━ all assets</span><span>╌ liquid fund</span><span id="pfver"></span></div></div>
+    </div>
+    <div style="overflow:auto;margin-top:10px"><table id="pftable"></table></div>
+    <h2 style="margin-top:12px">Which assets could be funded with this money</h2><div id="pffit" class="sub" style="line-height:1.7"></div>
+    <h2 style="margin-top:12px">All trades, every asset</h2><div style="overflow:auto;max-height:260px"><table id="pftrades"></table></div>
+  </div>
+  <div class="card c12" id="tabs" style="display:none"><h2>Look at one asset <span class="sub">tap to switch the panels below</span></h2><div id="tabbar" style="display:flex;gap:8px;flex-wrap:wrap"></div></div>
+  <div class="card c12" id="livecard"><h2><span id="livetitle">Live market</span> <span id="livesrc" class="sub"></span></h2>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:stretch">
+      <div style="min-width:230px;flex:0 0 260px">
+        <div class="big" id="lvprice">–</div><div class="sub" id="lvchg">waiting for price…</div>
+        <div style="margin:8px 0"><span class="pill" id="lvstat">…</span></div>
+        <div class="sub" id="lvpos"></div><div class="sub" id="lvasof" style="margin-top:6px"></div>
+      </div>
+      <div style="flex:1 1 420px;min-width:260px"><svg id="lvchart" viewBox="0 0 700 170"></svg></div>
+    </div>
+    <div class="sub" style="margin-top:6px">Display only. The agency still decides once a day at the close. Price is a proxy (COMEX gold × USD/INR scaled to MCX), not MCX ticks.</div>
+  </div>
+  <div class="card c4"><h2>Paper wallet <span id="wsrc"></span></h2>
+    <div class="big" id="pnl">–</div><div class="sub" id="pnlsub">all-time paper P&amp;L</div>
+    <div class="kv"><div><b id="eq">–</b><span>Equity</span></div><div><b id="wr">–</b><span>Win rate</span></div><div><b id="tr">–</b><span>Trades</span></div>
+    <div><b id="exp">–</b><span>Expectancy</span></div><div><b id="pf">–</b><span>Profit factor</span></div><div><b id="cost">–</b><span>Costs paid</span></div></div>
+    <div style="margin-top:12px"><div class="row"><span>Drawdown</span><span id="ddtxt"></span></div><div class="bar"><i id="ddbar" style="width:0;background:var(--g)"></i></div>
+    <div class="row"><span>15-day progress</span><span id="progtxt"></span></div><div class="bar"><i id="progbar" style="width:0;background:var(--b)"></i></div></div></div>
+  <div class="card c8"><h2>Gold price (rupees per gram) · trades marked <span id="pxinfo"></span></h2><svg id="candles" viewBox="0 0 760 250"></svg></div>
+
+  <div class="card c6"><h2>Equity vs liquid-fund benchmark</h2><svg id="eqchart" viewBox="0 0 600 210"></svg>
+    <div class="row"><span style="color:var(--g)">━ agency equity</span><span style="color:var(--mu)">╌ liquid fund (same days)</span><span id="verdict"></span></div></div>
+  <div class="card c6"><h2>Position &amp; next order</h2><div id="pos"></div>
+    <h2 style="margin-top:12px">Risk Guardian limits</h2><div id="limits"></div></div>
+
+  <div class="card c6"><h2>Go-live gates <span id="gatetag"></span></h2><table id="gates"></table><div class="sub" style="margin-top:6px">Passing is necessary, not proof of an edge. Real money starts only at Stage 1: one lot, orders placed by you.</div></div>
+  <div class="card c6"><h2>Order ticket for the next open <span id="tkt" class="sub"></span></h2><div id="ticket" class="log" style="height:auto;min-height:120px"></div>
+    <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button id="killbtn">KILL SWITCH</button><span class="sub" id="killtxt"></span></div></div>
+  <div class="card c12"><h2>Agent network · who said what <span class="sub">last decision</span></h2><svg id="net" viewBox="0 0 1000 340"></svg></div>
+
+  <div class="card c5"><h2>15-day grid · daily result</h2><div class="tiles" id="days"></div>
+    <h2 style="margin-top:14px">Strategy qualification (before trading)</h2><table id="evid"></table></div>
+  <div class="card c7"><h2>Live agent feed</h2><div class="log" id="log"></div></div>
+
+  <div class="card c12"><h2>Trades <span id="auditinfo"></span></h2><div style="overflow:auto"><table id="trades"></table></div></div>
+</div>
+<p class="sub" style="text-align:center;margin:14px 0">PAPER TRADING · simulated fills at next open · prices are a proxy unless you supplied MCX data · not financial advice</p>
+</div>
+<script>
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const inr=(n,d=2)=>(n<0?'-':'')+'₹'+Math.abs(n).toLocaleString('en-IN',{minimumFractionDigits:d,maximumFractionDigits:d});
+const sgn=n=>(n>=0?'+':'')+inr(n);const cls=n=>n>0?'var(--g)':n<0?'var(--r)':'var(--tx)';
+function S(tag,at,parent,txt){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(txt!==undefined)e.textContent=txt;if(parent)parent.appendChild(e);return e}
+function clear(e){while(e.firstChild)e.removeChild(e.firstChild)}
+const DEMO=new URLSearchParams(location.search).has('demo');let D=null;
+
+async function load(){
+  try{const r=await fetch('/api/state'+(DEMO?'?demo=1':''),{cache:'no-store'});D=await r.json();adapt();$('conn').textContent='CONNECTED';$('conn').className='pill ok';render()}
+  catch(e){$('conn').textContent='SERVER OFFLINE';$('conn').className='pill bad'}
+}
+
+let SEL='GOLDPETAL';
+function adapt(){
+  if(!D.multi||!D.sleeves)return;D.P=D.portfolio;
+  const s=D.sleeves.find(x=>x.symbol===SEL)||D.sleeves[0];
+  if(s){SEL=s.symbol;D.state=s.state;D.bars=s.bars;D.config=s.config;D.ticket=s.ticket;D.cursym=s}
+}
+function renderPortfolio(){
+  const P=D.P,eq=P.equity,pnl=eq-P.capital;$('pfcard').style.display='';$('tabs').style.display='';
+  $('pfmode').textContent=D.mode==='demo'?'DEMO DATA':'PAPER · proxy prices';
+  $('pfeq').textContent=inr(eq);$('pfpnl').textContent=sgn(pnl)+' ('+(pnl/P.capital*100).toFixed(2)+'%)';$('pfpnl').style.color=cls(pnl);
+  $('pfcap').textContent=inr(P.capital,0);$('pftr').textContent=P.trades.length;
+  const w=P.trades.filter(t=>t.net>0).length;$('pfwr').textContent=P.trades.length?Math.round(w/P.trades.length*100)+'%':'–';
+  $('pfcost').textContent=P.metrics?inr(P.metrics.costs_total):'–';
+  let h='<tr><th>Asset</th><th>Money put in</th><th>Money now</th><th>Profit / loss</th><th>Trades</th><th>Position</th></tr>';
+  P.summary.forEach(s=>{h+=`<tr><td>${s.symbol}</td><td>${inr(s.alloc,0)}</td><td>${inr(s.equity)}</td><td style="color:${cls(s.pnl)}">${sgn(s.pnl)}</td><td>${s.trades}</td><td>${s.pos}${s.halted?' (halted)':''}</td></tr>`});
+  const un=P.capital-P.summary.reduce((a,s)=>a+s.alloc,0);if(un>0)h+=`<tr><td>Cash not allocated</td><td>${inr(un,0)}</td><td>${inr(un)}</td><td>–</td><td>–</td><td>–</td></tr>`;
+  $('pftable').innerHTML=h;
+  $('pffit').innerHTML=P.fit.map(r=>r.ok?`<span style="color:var(--g)">FUNDED</span> ${r.symbol}: ${inr(r.alloc,0)} (margin about ${inr(r.margin||0,0)}${r.paper_only?', paper only':''})`:`<span style="color:var(--r)">NOT FUNDED</span> ${r.symbol}: ${r.reasons.join('; ')}`).join('<br>');
+  let t='<tr><th>Asset</th><th>Entry</th><th>Exit</th><th>Side</th><th>Entry px</th><th>Exit px</th><th>Net</th><th>Exit by</th></tr>';
+  P.trades.slice().reverse().forEach(x=>{t+=`<tr><td>${x.symbol}</td><td>${x.entry_date}</td><td>${x.exit_date}</td><td>${x.side>0?'LONG':'SHORT'}</td><td>${x.entry}</td><td>${x.exit}</td><td style="color:${cls(x.net)}">${sgn(x.net)}</td><td>${x.why}</td></tr>`});
+  if(!P.trades.length)t+='<tr><td colspan="8" style="color:var(--mu)">No trades yet. Staying in cash is a valid result.</td></tr>';
+  $('pftrades').innerHTML=t;
+  const tb=$('tabbar');tb.innerHTML='';
+  D.sleeves.forEach(s=>{const b=document.createElement('button');b.textContent=s.symbol+(s.paper_only?' (paper only)':'');if(s.symbol===SEL){b.style.borderColor='var(--g)';b.style.color='var(--g)'}
+    b.onclick=()=>{SEL=s.symbol;adapt();render();loadLive()};tb.appendChild(b)});
+  const svg=$('pfchart');clear(svg);const c=P.curve,e=c.map(x=>x.equity),n=e.length,W=640,H=180,L=56,R=10,T=8,B=20;
+  if(n<2)return;const d0=new Date(c[0].date).getTime(),y0=D.config.benchmark_liquid_fund_yield_pct/100;
+  const bn=c.map(p=>P.capital*(1+y0*Math.max(0,(new Date(p.date)-d0)/864e5)/365)),all=e.concat(bn),mn=Math.min(...all),mx=Math.max(...all),pad=(mx-mn)*.2||P.capital*.01,lo=mn-pad,hi=mx+pad;
+  const x=i=>L+(W-L-R)*i/(n-1),y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  for(let i=0;i<=3;i++){const v=lo+(hi-lo)*i/3;S('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1a232e'},svg);S('text',{x:L-6,y:y(v)+3,'text-anchor':'end',class:'tick'},svg,Math.round(v).toLocaleString('en-IN'))}
+  const path=a=>a.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' ');
+  S('path',{d:path(bn),fill:'none',stroke:'#7d8a99','stroke-dasharray':'5 4','stroke-width':1.6},svg);S('path',{d:path(e),fill:'none',stroke:'#2ecc71','stroke-width':2.2,'stroke-linejoin':'round'},svg);
+  S('text',{x:L,y:H-5,class:'tick'},svg,c[0].date);S('text',{x:W-R,y:H-5,'text-anchor':'end',class:'tick'},svg,c[n-1].date);
+  const lead=e[n-1]-bn[n-1];$('pfver').innerHTML=`<span style="color:${lead>=0?'var(--g)':'var(--r)'}">${lead>=0?'AHEAD OF':'BEHIND'} liquid fund by ${inr(Math.abs(lead))}</span>`;
+}
+function metrics(){
+  const st=D.state,cfg=D.config,c=st.curve,eqs=c.map(x=>x.equity),init=st.initial,k=cfg.contract,mult=k.lot_size/k.quote_unit;
+  const last=D.bars.length?D.bars[D.bars.length-1].close:null;
+  const tr=st.trades,w=tr.filter(t=>t.net>0),l=tr.filter(t=>t.net<=0);
+  let pk=eqs[0],mdd=0;eqs.forEach(e=>{pk=Math.max(pk,e);mdd=Math.max(mdd,(pk-e)/pk*100)});
+  const eq=eqs[eqs.length-1],days=c.length-1,tgt=cfg.finish_after_trading_days||15;
+  const d0=new Date(c[0].date),d1=new Date(c[c.length-1].date),cal=Math.max(1,(d1-d0)/864e5);
+  const bench=init*cfg.benchmark_liquid_fund_yield_pct/100*cal/365;
+  const dd=(st.peak-eq)/st.peak*100;
+  return{st,cfg,c,eqs,init,mult,last,tr,w,l,mdd,eq,days,tgt,bench,dd,cal,
+    wr:tr.length?w.length/tr.length*100:0,exp:tr.length?tr.reduce((a,t)=>a+t.net,0)/tr.length:0,
+    pf:l.length&&l.reduce((a,t)=>a+t.net,0)!==0?w.reduce((a,t)=>a+t.net,0)/Math.abs(l.reduce((a,t)=>a+t.net,0)):null};
+}
+function render(){
+  $('clock').textContent=D.now.replace('T',' ');
+  const b=$('banner');b.innerHTML='';
+  if(D.mode==='demo'){b.innerHTML='<div class="banner">DEMO · synthetic prices with strategies forced on, only to show the layout. Your real data appears at http://127.0.0.1:8765</div>'}
+  if(D.mode==='error'){b.innerHTML='<div class="banner">Server error: '+D.error+'</div>';return}
+  $('runbtn').style.display=D.mode==='demo'?'none':'';
+  $('wsrc').textContent=D.scale?'PROXY (COMEX×USDINR)':(D.mode==='demo'?'SYNTHETIC':'CSV DATA');
+  if(!D.state||!D.state.curve||!D.state.curve.length){
+    $('status').textContent='WAITING FOR FIRST RUN';$('status').className='pill warn';
+    b.innerHTML='<div class="banner">No paper-trading state yet. Run setup_windows.bat, or click "Update now". Preview the layout: add ?demo=1 to the address.</div>';return}
+  const M=metrics();
+  panels(M);
+}
+function panels(M){
+  const st=M.st;
+  $('daytag').textContent='DAY '+Math.min(M.days,M.tgt)+'/'+M.tgt;
+  let s='RUNNING',c='pill ok';if(D.done){s='FINISHED';c='pill blue'}else if(st.halted){s='HALTED BY RISK GUARDIAN';c='pill bad'}else if(D.running){s='UPDATING…';c='pill warn'}
+  $('status').textContent=s;$('status').className=c;
+  const pnl=M.eq-M.init;
+  $('pnl').textContent=sgn(pnl);$('pnl').style.color=cls(pnl);$('pnlsub').textContent=(pnl/M.init*100).toFixed(2)+'% since start · '+M.c[0].date+' to '+M.c[M.c.length-1].date;
+  $('eq').textContent=inr(M.eq);$('wr').textContent=M.tr.length?M.wr.toFixed(0)+'%':'–';$('tr').textContent=M.tr.length;
+  $('exp').textContent=M.tr.length?sgn(M.exp):'–';$('pf').textContent=M.pf==null?'–':M.pf.toFixed(2);$('cost').textContent=inr(st.costs);
+  const halt=M.cfg.risk.drawdown_halt_pct;$('ddtxt').textContent=M.dd.toFixed(1)+'% of '+halt+'% halt line';
+  $('ddbar').style.width=Math.min(100,M.dd/halt*100)+'%';$('ddbar').style.background=M.dd>halt*.7?'var(--r)':M.dd>halt*.4?'var(--a)':'var(--g)';
+  $('progtxt').textContent=Math.min(M.days,M.tgt)+' of '+M.tgt+' trading days';$('progbar').style.width=Math.min(100,M.days/M.tgt*100)+'%';
+  extras();if(D.multi)renderPortfolio();candles(M);equity(M);position(M);limits(M);network(M);dayGrid(M);evidence(M);feed(M);trades(M);
+}
+
+function extras(){
+  const g=D.gates||{rows:[]};
+  $('gates').innerHTML=g.rows.map(r=>`<tr><td>${r.name}</td><td style="color:var(--mu)">need ${r.need}</td><td>${r.have}</td><td style="color:${r.ok?'var(--g)':'var(--r)'}">${r.ok?'PASS':'FAIL'}</td></tr>`).join('');
+  $('gatetag').innerHTML=g.rows.length?`<span class="pill ${g.ready?'ok':'bad'}">${g.ready?'ELIGIBLE FOR STAGE 1':'NOT READY'}</span>`:'';
+  const t=D.ticket||{lines:[]};$('ticket').innerHTML='';t.lines.forEach(l=>{const d=document.createElement('div');d.textContent=l||' ';$('ticket').appendChild(d)});
+  $('tkt').textContent=t.has_order?'ACTION NEEDED':'nothing to do';
+  $('killtxt').textContent=D.kill?'ACTIVE: trading halted':'off';$('killbtn').style.color=D.kill?'var(--r)':'';
+}
+$('killbtn').onclick=async()=>{if(DEMO)return;if(!confirm('Toggle the kill switch? When on, the agency stops opening new trades.'))return;try{await fetch('/api/kill',{method:'POST'});load()}catch(e){}};
+function candles(M){
+  const svg=$('candles');clear(svg);const bars=D.bars.slice(-70);if(!bars.length)return;
+  const W=760,H=250,L=52,R=10,T=10,B=22,mn=Math.min(...bars.map(b=>b.low)),mx=Math.max(...bars.map(b=>b.high));
+  const pos=M.st.pos;let lo=mn,hi=mx;if(pos){lo=Math.min(lo,pos.stop);hi=Math.max(hi,pos.stop)}
+  const pad=(hi-lo)*.06||1;lo-=pad;hi+=pad;const y=v=>T+(hi-v)/(hi-lo)*(H-T-B),bw=(W-L-R)/bars.length,x=i=>L+bw*(i+.5);
+  for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4;S('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1a232e'},svg);S('text',{x:L-6,y:y(v)+3,'text-anchor':'end',class:'tick'},svg,Math.round(v).toLocaleString('en-IN'))}
+  bars.forEach((b,i)=>{const up=b.close>=b.open,col=up?'#2ecc71':'#ef5350';S('line',{x1:x(i),x2:x(i),y1:y(b.high),y2:y(b.low),stroke:col},svg);
+    S('rect',{x:x(i)-bw*.32,width:bw*.64,y:y(Math.max(b.open,b.close)),height:Math.max(1,Math.abs(y(b.open)-y(b.close))),fill:col},svg)});
+  const idx={};bars.forEach((b,i)=>idx[b.date]=i);
+  M.tr.forEach(t=>{if(idx[t.entry_date]!==undefined)S('path',{d:`M${x(idx[t.entry_date])} ${y(t.entry)+2} l-5 9 h10z`,fill:'#5aa9ff'},svg);
+    if(idx[t.exit_date]!==undefined)S('circle',{cx:x(idx[t.exit_date]),cy:y(t.exit),r:4,fill:t.net>0?'#2ecc71':'#ef5350',stroke:'#0a0e13'},svg)});
+  if(pos){S('line',{x1:L,x2:W-R,y1:y(pos.entry),y2:y(pos.entry),stroke:'#5aa9ff','stroke-dasharray':'4 4'},svg);S('line',{x1:L,x2:W-R,y1:y(pos.stop),y2:y(pos.stop),stroke:'#ef5350','stroke-dasharray':'2 4'},svg);
+    S('text',{x:W-R-2,y:y(pos.entry)-4,'text-anchor':'end',class:'tick',fill:'#5aa9ff'},svg,'entry');S('text',{x:W-R-2,y:y(pos.stop)-4,'text-anchor':'end',class:'tick'},svg,'stop')}
+  S('text',{x:L,y:H-6,class:'tick'},svg,bars[0].date);S('text',{x:W-R,y:H-6,'text-anchor':'end',class:'tick'},svg,bars[bars.length-1].date);
+  $('pxinfo').textContent='last '+inr(bars[bars.length-1].close,0)+' / g';
+}
+function equity(M){
+  const svg=$('eqchart');clear(svg);const W=600,H=210,L=56,R=12,T=10,B=22,e=M.eqs,n=e.length;
+  const d0=new Date(M.c[0].date).getTime();const bench=M.c.map(p=>M.init*(1+M.cfg.benchmark_liquid_fund_yield_pct/100*Math.max(0,(new Date(p.date)-d0)/864e5)/365));
+  const all=e.concat(bench),mn=Math.min(...all),mx=Math.max(...all),pad=(mx-mn)*.2||M.init*.01,lo=mn-pad,hi=mx+pad;
+  const x=i=>L+(n<2?0:(W-L-R)*i/(n-1)),y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  for(let i=0;i<=3;i++){const v=lo+(hi-lo)*i/3;S('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1a232e'},svg);S('text',{x:L-6,y:y(v)+3,'text-anchor':'end',class:'tick'},svg,Math.round(v).toLocaleString('en-IN'))}
+  const path=a=>a.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' ');
+  S('path',{d:path(bench),fill:'none',stroke:'#7d8a99','stroke-dasharray':'5 4','stroke-width':1.6},svg);
+  S('path',{d:path(e),fill:'none',stroke:'#2ecc71','stroke-width':2.2,'stroke-linejoin':'round'},svg);
+  S('text',{x:L,y:H-6,class:'tick'},svg,M.c[0].date);S('text',{x:W-R,y:H-6,'text-anchor':'end',class:'tick'},svg,M.c[n-1].date);
+  const net=M.eq-M.init-M.cfg.ai_cost_inr_per_month*M.cal/30,beats=net>M.bench;
+  $('verdict').innerHTML=`<span style="color:${beats?'var(--g)':'var(--r)'}">${beats?'AHEAD OF':'BEHIND'} liquid fund by ${inr(Math.abs(net-M.bench))}</span>`;
+}
+function position(M){
+  const p=M.st.pos,pen=M.st.pending,el=$('pos');let h='';
+  if(p){const un=M.last==null?0:(M.last-p.entry)*p.side*M.mult*p.qty;
+    h+=`<div class="big" style="font-size:22px;color:${p.side>0?'var(--g)':'var(--r)'}">${p.side>0?'LONG':'SHORT'} ${p.qty} lot</div><div class="sub">since ${p.date} · entry ${inr(p.entry)} · stop ${inr(p.stop)} · by ${p.why||'-'}</div>
+    <div class="kv"><div><b style="color:${cls(un)}">${sgn(un)}</b><span>Unrealised</span></div><div><b>${inr(Math.abs(p.entry-p.stop)*M.mult*p.qty,0)}</b><span>Risk at stop</span></div><div><b>${inr(M.cfg.margin_pct/100*p.entry*M.mult*p.qty,0)}</b><span>Margin</span></div></div>`}
+  else h+=`<div class="big" style="font-size:22px;color:var(--mu)">FLAT · in cash</div><div class="sub">no open position</div>`;
+  h+=`<div class="sub" style="margin-top:10px">NEXT ORDER (fills at next open): `+(pen?`${pen.close?'close current · ':''}${pen.open?(pen.open.side>0?'open LONG':'open SHORT')+' (stop '+inr(pen.open.stop_dist,0)+' away)':'no new entry'}`:'none')+`</div>`;
+  el.innerHTML=h;
+}
+function limits(M){
+  const r=M.cfg.risk,eq=M.eq,c=M.c,p=M.st.pos,rows=[];
+  const day=c.length>1?(c[c.length-1].equity-c[c.length-2].equity)/c[c.length-2].equity*100:0,base=c[Math.max(0,c.length-6)].equity,wk=(eq-base)/base*100;
+  rows.push(['Risk at stop vs per-trade limit',p?Math.abs(p.entry-p.stop)*M.mult*p.qty/(eq*r.max_risk_per_trade_pct/100):0,p?inr(Math.abs(p.entry-p.stop)*M.mult*p.qty,0)+' / '+inr(eq*r.max_risk_per_trade_pct/100,0):'no position']);
+  rows.push(['Margin use',p?(M.cfg.margin_pct/100*p.entry*M.mult*p.qty)/(eq*r.max_margin_use_pct/100):0,p?Math.round(M.cfg.margin_pct/100*p.entry*M.mult*p.qty/eq*100)+'% / '+r.max_margin_use_pct+'%':'no position']);
+  rows.push(['Today vs daily loss limit',Math.max(0,-day)/r.daily_loss_limit_pct,day.toFixed(2)+'% / -'+r.daily_loss_limit_pct+'%']);
+  rows.push(['5 days vs weekly loss limit',Math.max(0,-wk)/r.weekly_loss_limit_pct,wk.toFixed(2)+'% / -'+r.weekly_loss_limit_pct+'%']);
+  rows.push(['Drawdown vs halt line',M.dd/r.drawdown_halt_pct,M.dd.toFixed(1)+'% / '+r.drawdown_halt_pct+'%']);
+  $('limits').innerHTML=rows.map(x=>{const f=Math.min(1,x[1]);return`<div class="row"><span>${x[0]}</span><span>${x[2]}</span></div><div class="bar"><i style="width:${f*100}%;background:${f>.8?'var(--r)':f>.5?'var(--a)':'var(--g)'}"></i></div>`}).join('');
+}
+function lastLine(key){const L=D.state.log;for(let i=L.length-1;i>=0;i--)if(L[i].includes(key))return L[i];return''}
+function network(M){
+  const svg=$('net');clear(svg);const st=M.st,lr=lastLine('RESEARCH ');
+  const regime=(lr.match(/RESEARCH (.*?) \| QUANT/)||[,'warming up'])[1];
+  const votes={};let m,re=/\('([a-z0-9_]+)', (-?\d)\)/g;while((m=re.exec(lr)))votes[m[1]]=+m[2];
+  const want=+((lr.match(/CIO wants ([+-]\d)/)||[,0])[1]);const vt=v=>v>0?'votes LONG':v<0?'votes SHORT':'votes FLAT';
+  const names=['trend_ema20_50','breakout_20d','meanrev_rsi14'],en=st.enabled||[];
+  const lastRisk=lastLine('RISK GUARDIAN'),mis=st.audit.length;
+  const net=M.eq-M.init-M.cfg.ai_cost_inr_per_month*M.cal/30,beats=net>M.bench,p=st.pos;
+  const N={feed:{x:10,y:150,t:'MARKET DATA',s:(st.last_date||'')+' · '+D.bars.length+' bars',k:'on'},
+   res:{x:190,y:20,t:'RESEARCHER',s:regime.slice(0,30),k:'on'},
+   q0:{x:190,y:110,t:'QUANT · trend',s:en.includes(names[0])?vt(votes[names[0]]||0):'not qualified',k:en.includes(names[0])?'on':'off'},
+   q1:{x:190,y:190,t:'QUANT · breakout',s:en.includes(names[1])?vt(votes[names[1]]||0):'not qualified',k:en.includes(names[1])?'on':'off'},
+   q2:{x:190,y:270,t:'QUANT · mean-rev',s:en.includes(names[2])?vt(votes[names[2]]||0):'not qualified',k:en.includes(names[2])?'on':'off'},
+   cio:{x:430,y:150,t:'CIO',s:en.length?('wants '+(want>0?'LONG':want<0?'SHORT':'CASH')):'no strategy: stays cash',k:'on'},
+   risk:{x:640,y:60,t:'RISK GUARDIAN',s:st.halted?'HALTED':st.vetoes+' vetoes/blocks',k:st.halted?'alert':(st.vetoes>0?'warn':'on')},
+   cost:{x:640,y:250,t:'COST ANALYST',s:inr(st.costs)+' paid',k:'on'},
+   brk:{x:830,y:150,t:'PAPER BROKER',s:p?((p.side>0?'LONG @ ':'SHORT @ ')+Math.round(p.entry)):'flat',k:p?'on':'off'},
+   aud:{x:830,y:250,t:'AUDITOR',s:mis?mis+' mismatches':'books reconcile',k:mis?'alert':'on'},
+   sur:{x:830,y:30,t:'SURVIVAL OFFICER',s:beats?'ahead of liquid fund':'behind liquid fund',k:beats?'on':'warn'}};
+  const W=150,H=56;
+  const E=[['feed','res'],['feed','q0'],['feed','q1'],['feed','q2'],['res','cio'],['q0','cio'],['q1','cio'],['q2','cio'],['cio','risk'],['risk','brk'],['cost','brk'],['brk','aud'],['brk','sur']];
+  E.forEach(([a,b])=>{const A=N[a],B=N[b],x1=A.x+W,y1=A.y+H/2,x2=B.x,y2=B.y+H/2,dx=(x2-x1)/2;
+    let k='edge';if(A.k==='off'||B.k==='off')k+=' cold';else if(B.k==='alert'||A.k==='alert')k+=' stop';else k+=' hot';
+    S('path',{d:`M${x1} ${y1} C${x1+dx} ${y1} ${x2-dx} ${y2} ${x2} ${y2}`,class:k},svg)});
+  for(const key in N){const n=N[key],g=S('g',{class:'node '+n.k,transform:`translate(${n.x},${n.y})`},svg);S('rect',{width:W,height:H,rx:9},g);S('text',{x:10,y:22,class:'t'},g,n.t);S('text',{x:10,y:40,class:'s'},g,n.s.length>25?n.s.slice(0,24)+'…':n.s)}
+}
+function dayGrid(M){
+  const el=$('days');el.innerHTML='';const c=M.c;
+  for(let i=1;i<=M.tgt;i++){const d=document.createElement('div');d.className='tile t-n';
+    if(i<c.length){const dp=c[i].equity-c[i-1].equity;d.className='tile '+(dp>0.005?'t-g':dp<-0.005?'t-r':'t-w');d.innerHTML=`${i}<small>${dp===0?'flat':sgn(dp)}</small>`}
+    else d.innerHTML=`${i}<small>–</small>`;el.appendChild(d)}
+}
+function evidence(M){
+  const t=$('evid');let h='<tr><th>Strategy</th><th>Trades</th><th>In-sample</th><th>Out-of-sample</th><th>Trades?</th></tr>';
+  (M.st.evidence||[]).forEach(e=>{h+=`<tr><td>${e.name}</td><td>${e.trades}</td><td style="color:${cls(e.exp_in_sample)}">${e.exp_in_sample}</td><td style="color:${cls(e.exp_out_of_sample)}">${e.exp_out_of_sample}</td><td style="color:${e.enabled?'var(--g)':'var(--mu)'}">${e.enabled?'YES':'no'}</td></tr>`});
+  t.innerHTML=h;
+}
+function feed(M){
+  const el=$('log');el.innerHTML='';const L=M.st.log.slice(-60).reverse();
+  L.forEach(l=>{const d=document.createElement('div');const k=l.includes('RISK GUARDIAN')?'RISK':l.includes('ORDER')?'ORDER':l.includes('BROKER')?'BROKER':l.includes('QUANT')?(l.includes('CIO')?'CIO':'QUANT'):'RESEARCH';
+    d.className='L-'+(l.includes('RESEARCH')?'RESEARCH':k);d.textContent=l;el.appendChild(d)});
+  (D.runlog||[]).slice(-3).forEach(l=>{const d=document.createElement('div');d.style.color='var(--mu)';d.textContent='[runner] '+l;el.appendChild(d)});
+}
+function trades(M){
+  const t=$('trades');let h='<tr><th>Entry</th><th>Exit</th><th>Side</th><th>Entry px</th><th>Exit px</th><th>Gross</th><th>Costs</th><th>Net</th><th>Exit by</th></tr>';
+  M.tr.slice().reverse().forEach(x=>{h+=`<tr><td>${x.entry_date}</td><td>${x.exit_date}</td><td>${x.side>0?'LONG':'SHORT'}</td><td>${x.entry}</td><td>${x.exit}</td><td>${x.gross}</td><td>${x.costs}</td><td style="color:${cls(x.net)}">${sgn(x.net)}</td><td>${x.why}</td></tr>`});
+  if(!M.tr.length)h+='<tr><td colspan="9" style="color:var(--mu)">No trades yet. Staying in cash is a valid result.</td></tr>';
+  t.innerHTML=h;$('auditinfo').textContent=M.st.audit.length?M.st.audit.length+' audit mismatches':'auditor: books reconcile';
+}
+$('runbtn').onclick=async()=>{try{const r=await fetch('/api/run',{method:'POST'});const j=await r.json();$('runbtn').textContent=j.status==='busy'?'Already running…':'Started…';setTimeout(()=>$('runbtn').textContent='Update now',4000)}catch(e){}};
+load();setInterval(load,5000);
+let LV=null;
+async function loadLive(){
+  try{const px=(D&&D.bars&&D.bars.length)?D.bars[D.bars.length-1].close:15300;const r=await fetch('/api/live?sym='+SEL+(DEMO?'&demo=1&price='+px:''),{cache:'no-store'});LV=await r.json();renderLive()}
+  catch(e){$('lvstat').textContent='NO LINK';$('lvstat').className='pill bad'}
+}
+function renderLive(){
+  const st=$('lvstat');
+  if(!LV||!LV.ok){st.textContent='NO LIVE DATA';st.className='pill warn';$('lvprice').textContent='–';
+    $('lvchg').textContent=LV&&LV.error?('feed error: '+LV.error.slice(0,90)):'';return}
+  const ch=LV.last-LV.first,pc=ch/LV.first*100;
+  $('lvprice').textContent=inr(LV.last,2);$('lvprice').style.color=cls(ch);
+  $('lvchg').textContent=(ch>=0?'+':'')+ch.toFixed(2)+' ('+pc.toFixed(2)+'%) over the window shown';
+  const age=Math.max(0,Date.now()/1000-LV.asof);
+  if(LV.demo){st.textContent='DEMO PRICES';st.className='pill warn'}
+  else if(age<1200){st.textContent='LIVE · '+Math.round(age/60)+' min old';st.className='pill ok'}
+  else{st.textContent='MARKET CLOSED / STALE';st.className='pill warn'}
+  $('lvasof').textContent='last tick '+new Date(LV.asof*1000).toLocaleString();
+  $('livesrc').textContent=LV.demo?'SYNTHETIC':'PROXY';$('livetitle').textContent='Live market · '+SEL+' (rupees)';
+  const pos=D&&D.state&&D.state.pos;
+  if(pos&&D.config){const m=D.config.contract.lot_size/D.config.contract.quote_unit,un=(LV.last-pos.entry)*pos.side*m*pos.qty;
+    const toStop=Math.abs(LV.last-pos.stop)*m*pos.qty,hit=(pos.side>0&&LV.last<=pos.stop)||(pos.side<0&&LV.last>=pos.stop);
+    $('lvpos').innerHTML='Paper '+(pos.side>0?'LONG':'SHORT')+' now <b style="color:'+cls(un)+'">'+sgn(un)+'</b> · '+(hit?'<b style="color:var(--r)">price is beyond the stop</b>':inr(toStop,0)+' from stop')}
+  else $('lvpos').textContent='No open paper position.';
+  const svg=$('lvchart');clear(svg);const W=700,H=170,L=58,R=10,T=8,B=20,p=LV.p,t=LV.t,mn=Math.min(...p),mx=Math.max(...p),pad=(mx-mn)*.12||1,lo=mn-pad,hi=mx+pad;
+  const x=i=>L+(W-L-R)*i/(p.length-1),y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  for(let i=0;i<=3;i++){const v=lo+(hi-lo)*i/3;S('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#1a232e'},svg);S('text',{x:L-6,y:y(v)+3,'text-anchor':'end',class:'tick'},svg,Math.round(v).toLocaleString('en-IN'))}
+  const col=LV.last>=LV.first?'#2ecc71':'#ef5350';
+  S('path',{d:p.map((v,i)=>(i?'L':'M')+x(i)+' '+y(v)).join(' '),fill:'none',stroke:col,'stroke-width':1.8,'stroke-linejoin':'round'},svg);
+  if(pos){[['entry',pos.entry,'#5aa9ff'],['stop',pos.stop,'#ef5350']].forEach(([n,v,c])=>{if(v>lo&&v<hi){S('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:c,'stroke-dasharray':'4 4'},svg);S('text',{x:W-R-2,y:y(v)-3,'text-anchor':'end',class:'tick'},svg,n)}})}
+  S('circle',{cx:x(p.length-1),cy:y(LV.last),r:4,fill:col},svg);
+  const f=ts=>new Date(ts*1000).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  S('text',{x:L,y:H-5,class:'tick'},svg,f(t[0]));S('text',{x:W-R,y:H-5,'text-anchor':'end',class:'tick'},svg,f(t[t.length-1]));
+}
+loadLive();setInterval(loadLive,15000);
+
+</script></body></html>

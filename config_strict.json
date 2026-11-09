@@ -1,0 +1,35 @@
+{
+  "contract": {
+    "symbol": "GOLDPETAL",
+    "lot_size": 1,
+    "quote_unit": 1
+  },
+  "capital_inr": 4500,
+  "margin_pct": 9.25,
+  "slippage_per_unit": 2.0,
+  "stop_atr_mult": 1.5,
+  "min_agree": 1,
+  "validation": {
+    "in_sample_frac": 0.6,
+    "min_trades": 15
+  },
+  "costs": {
+    "brokerage_flat": 20,
+    "brokerage_pct": 0.03,
+    "txn_pct": 0.0021,
+    "sebi_per_crore": 10,
+    "gst_pct": 18,
+    "ctt_pct_sell": 0.01,
+    "stamp_pct_buy": 0.002
+  },
+  "risk": {
+    "max_risk_per_trade_pct": 0.5,
+    "max_margin_use_pct": 60,
+    "daily_loss_limit_pct": 2.0,
+    "weekly_loss_limit_pct": 4.0,
+    "drawdown_halt_pct": 10.0
+  },
+  "benchmark_liquid_fund_yield_pct": 6.4,
+  "ai_cost_inr_per_month": 0,
+  "finish_after_trading_days": 15
+}

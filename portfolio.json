@@ -1,0 +1,65 @@
+{
+ "fit": [
+  {
+   "symbol": "GOLDPETAL",
+   "name": "Gold Petal (1 g)",
+   "paper_only": false,
+   "weight": 0.6,
+   "ok": true,
+   "reasons": [],
+   "lot_value": 14870,
+   "margin": 1375,
+   "stop_risk": 471,
+   "alloc": 9000
+  },
+  {
+   "symbol": "SILVER100",
+   "name": "Silver 100 (100 g)",
+   "paper_only": false,
+   "weight": 0.3,
+   "ok": false,
+   "reasons": [
+    "a normal stop risks Rs806, well above the Rs375 per-trade limit"
+   ],
+   "lot_value": 18626,
+   "margin": 2377,
+   "stop_risk": 806,
+   "alloc": 0
+  },
+  {
+   "symbol": "CRUDEOILM",
+   "name": "Crude oil mini (10 bbl)",
+   "paper_only": false,
+   "weight": 0.2,
+   "ok": false,
+   "reasons": [
+    "margin Rs26,879 is over 50% of capital",
+    "a normal stop risks Rs6,563, well above the Rs375 per-trade limit"
+   ],
+   "lot_value": 86012,
+   "margin": 26879,
+   "stop_risk": 6563,
+   "alloc": 0
+  },
+  {
+   "symbol": "BTC",
+   "name": "Bitcoin (paper only)",
+   "paper_only": true,
+   "weight": 0.4,
+   "ok": true,
+   "reasons": [],
+   "lot_value": 3578,
+   "margin": 3578,
+   "stop_risk": 161,
+   "alloc": 6000
+  }
+ ],
+ "alloc": {
+  "GOLDPETAL": 9000,
+  "SILVER100": 0,
+  "CRUDEOILM": 0,
+  "BTC": 6000
+ },
+ "halted": false,
+ "created": "2026-11-09"
+}

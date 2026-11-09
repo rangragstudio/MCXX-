@@ -1,0 +1,124 @@
+{
+  "capital_inr": 15000,
+  "stop_atr_mult": 1.5,
+  "min_agree": 1,
+  "validation": {
+    "in_sample_frac": 0.6,
+    "min_trades": 15
+  },
+  "costs": {
+    "brokerage_flat": 20,
+    "brokerage_pct": 0.03,
+    "txn_pct": 0.0021,
+    "sebi_per_crore": 10,
+    "gst_pct": 18,
+    "ctt_pct_sell": 0.01,
+    "stamp_pct_buy": 0.002
+  },
+  "risk": {
+    "max_risk_per_trade_pct": 2.5,
+    "max_margin_use_pct": 50,
+    "daily_loss_limit_pct": 3.0,
+    "weekly_loss_limit_pct": 6.0,
+    "drawdown_halt_pct": 10.0
+  },
+  "benchmark_liquid_fund_yield_pct": 6.4,
+  "ai_cost_inr_per_month": 0,
+  "finish_after_trading_days": 60,
+  "checkpoints": [
+    15,
+    60
+  ],
+  "gates": {
+    "min_trading_days": 60,
+    "min_trades": 30,
+    "min_profit_factor": 1.3
+  },
+  "clock_symbol": "GOLDPETAL",
+  "instruments": [
+    {
+      "symbol": "GOLDPETAL",
+      "name": "Gold Petal (1 g)",
+      "yahoo": "GC=F",
+      "usd_factor": 0.0321507466,
+      "use_fx": true,
+      "lot_size": 1,
+      "quote_unit": 1,
+      "margin_pct": 9.25,
+      "slippage_per_unit": 2.0,
+      "weight": 0.6,
+      "kind": "mcx"
+    },
+    {
+      "symbol": "SILVER100",
+      "name": "Silver 100 (100 g)",
+      "yahoo": "SI=F",
+      "usd_factor": 0.321507466,
+      "use_fx": true,
+      "lot_size": 100,
+      "quote_unit": 10,
+      "margin_pct": 12.76,
+      "slippage_per_unit": 3.0,
+      "weight": 0.3,
+      "kind": "mcx"
+    },
+    {
+      "symbol": "CRUDEOILM",
+      "name": "Crude oil mini (10 bbl)",
+      "yahoo": "CL=F",
+      "usd_factor": 1.0,
+      "use_fx": true,
+      "lot_size": 10,
+      "quote_unit": 1,
+      "margin_pct": 31.25,
+      "slippage_per_unit": 5.0,
+      "weight": 0.2,
+      "kind": "mcx"
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin (paper only)",
+      "yahoo": "BTC-USD",
+      "usd_factor": 1.0,
+      "use_fx": true,
+      "lot_size": 0.0005,
+      "quote_unit": 1,
+      "margin_pct": 100,
+      "slippage_per_unit": 500,
+      "weight": 0.4,
+      "kind": "crypto",
+      "long_only": true,
+      "paper_only": true,
+      "gain_tax_pct": 30.0,
+      "costs": {
+        "brokerage_flat": 1000000,
+        "brokerage_pct": 0.2,
+        "txn_pct": 0,
+        "sebi_per_crore": 0,
+        "gst_pct": 18,
+        "ctt_pct_sell": 0,
+        "stamp_pct_buy": 0
+      }
+    }
+  ],
+  "calibration": [
+    {
+      "symbol": "GOLDPETAL",
+      "date": "2026-10-16",
+      "mcx_price": 15042,
+      "note": "Dec contract last price reported 16 Oct 2026"
+    },
+    {
+      "symbol": "SILVER100",
+      "date": "2026-09-03",
+      "mcx_price": 2346,
+      "note": "price reported 3 Sep 2026"
+    },
+    {
+      "symbol": "CRUDEOILM",
+      "date": "2026-11-03",
+      "mcx_price": 9079,
+      "note": "price reported 3 Nov 2026"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+ "initial": 9000,
+ "pos": null,
+ "pending": null,
+ "peak": 9000,
+ "realized": 0.0,
+ "costs": 0.0,
+ "trades": [],
+ "curve": [
+  {
+   "date": "2026-11-08",
+   "equity": 9000.0
+  }
+ ],
+ "last_date": "2026-11-08",
+ "halted": false,
+ "vetoes": 0,
+ "enabled": [],
+ "evidence": [
+  {
+   "name": "trend_ema20_50",
+   "trades": 252,
+   "exp_in_sample": -2.27,
+   "exp_out_of_sample": 92.98,
+   "enabled": false
+  },
+  {
+   "name": "breakout_20d",
+   "trades": 450,
+   "exp_in_sample": -5.85,
+   "exp_out_of_sample": 14.25,
+   "enabled": false
+  },
+  {
+   "name": "meanrev_rsi14",
+   "trades": 264,
+   "exp_in_sample": -2.14,
+   "exp_out_of_sample": -1.67,
+   "enabled": false
+  }
+ ],
+ "log": [
+  "2026-11-08 RESEARCH downtrend, ATR 313.7 (2.11% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)"
+ ],
+ "audit": []
+}
