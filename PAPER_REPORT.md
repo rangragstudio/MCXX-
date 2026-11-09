@@ -1,13 +1,14 @@
 # Paper portfolio report
 
-Updated: 2026-11-09 13:47 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
+Updated: 2026-11-09 23:19 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
 
 ## Total money now: Rs15,000.00
 
 - Based on the last daily close (no fresh live price).
 - Profit / loss: **+Rs0.00 (+0.00%)** since start with Rs15,000
-- Day 0 of 60 (MCX trading days). Data through 2026-11-08.
+- Day 1 of 60 (MCX trading days). Data through 2026-11-09.
 - Closed trades: 0. Costs and tax paid: Rs0.00. Risk vetoes/blocks: 0. Halted: no.
+- Liquid fund would have earned Rs2.63 in the same time. Net after AI cost: +Rs0.00 -> **behind the liquid fund**.
 
 ## Each asset
 
@@ -24,6 +25,7 @@ Updated: 2026-11-09 13:47 UTC. **PAPER TRADING with simulated fills on proxy pri
 
 | Date | Total money | Change |
 |---|---|---|
+| 2026-11-09 | Rs15,000.00 | +Rs0.00 |
 
 ## All trades
 
@@ -43,7 +45,7 @@ No trades yet. Staying in cash is a valid result.
 
 ## Go-live gates (all must pass before any real money)
 
-- FAIL: Paper trading days (need >= 60, have 0)
+- FAIL: Paper trading days (need >= 60, have 1)
 - FAIL: Closed paper trades (need >= 30, have 0)
 - FAIL: Expectancy per trade after costs (need > Rs0, have Rs0)
 - FAIL: Profit factor (need >= 1.3, have None)
@@ -62,4 +64,6 @@ No trades yet. Staying in cash is a valid result.
 2026-11-09T04:59:22 data: {"GOLDPETAL": 6574, "SILVER100": 6575, "CRUDEOILM": 6582, "BTC": 4435}
 2026-11-09T13:47:10 data: {"GOLDPETAL": 6573, "SILVER100": 6574, "CRUDEOILM": 6581, "BTC": 4436}
 2026-11-09T13:47:10 BTC: 1 new bar(s), at 2026-11-08
+2026-11-09T23:19:47 data: {"GOLDPETAL": 6574, "SILVER100": 6575, "CRUDEOILM": 6582, "BTC": 4436}
+2026-11-09T23:19:47 GOLDPETAL: 1 new bar(s), at 2026-11-09
 ```
