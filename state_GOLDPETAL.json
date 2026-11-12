@@ -18,9 +18,13 @@
   {
    "date": "2026-11-10",
    "equity": 9000.0
+  },
+  {
+   "date": "2026-11-11",
+   "equity": 9000.0
   }
  ],
- "last_date": "2026-11-10",
+ "last_date": "2026-11-11",
  "halted": false,
  "vetoes": 0,
  "enabled": [],
@@ -50,7 +54,8 @@
  "log": [
   "2026-11-08 RESEARCH downtrend, ATR 313.7 (2.11% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)",
   "2026-11-09 RESEARCH downtrend, ATR 305.9 (2.06% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)",
-  "2026-11-10 RESEARCH downtrend, ATR 329.2 (2.28% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)"
+  "2026-11-10 RESEARCH downtrend, ATR 329.2 (2.28% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)",
+  "2026-11-11 RESEARCH downtrend, ATR 320.0 (2.24% of price) | QUANT no enabled strategies | CIO wants +0 (now +0)"
  ],
  "audit": []
 }
