@@ -1,4 +1,4 @@
-# Order tickets for the next open (data up to 2026-11-19)
+# Order tickets for the next open (data up to 2026-11-20)
 
 PAPER SYSTEM. Act on these only in the real-money stage. One ticket per instrument.
 
