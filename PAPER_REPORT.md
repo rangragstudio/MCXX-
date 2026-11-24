@@ -1,6 +1,6 @@
 # Paper portfolio report
 
-Updated: 2026-11-24 00:14 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
+Updated: 2026-11-24 10:18 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
 
 ## Total money now: Rs15,000.00
 
@@ -67,8 +67,6 @@ No trades yet. Staying in cash is a valid result.
 
 ## Runner log (last 10 lines)
 ```
-2026-11-20T19:14:07 data: {"GOLDPETAL": 6582, "SILVER100": 6583, "CRUDEOILM": 6590, "BTC": 4447}
-2026-11-21T07:37:30 data: {"GOLDPETAL": 6583, "SILVER100": 6584, "CRUDEOILM": 6591, "BTC": 4448}
 2026-11-21T07:37:30 GOLDPETAL: 1 new bar(s), at 2026-11-20
 2026-11-21T07:37:30 BTC: 1 new bar(s), at 2026-11-20
 2026-11-22T07:19:00 data: {"GOLDPETAL": 6583, "SILVER100": 6584, "CRUDEOILM": 6591, "BTC": 4449}
@@ -77,4 +75,6 @@ No trades yet. Staying in cash is a valid result.
 2026-11-24T00:14:08 data: {"GOLDPETAL": 6584, "SILVER100": 6585, "CRUDEOILM": 6592, "BTC": 4450}
 2026-11-24T00:14:08 GOLDPETAL: 1 new bar(s), at 2026-11-23
 2026-11-24T00:14:08 BTC: 2 new bar(s), at 2026-11-22
+2026-11-24T10:18:13 data: {"GOLDPETAL": 6584, "SILVER100": 6585, "CRUDEOILM": 6592, "BTC": 4451}
+2026-11-24T10:18:14 BTC: 1 new bar(s), at 2026-11-23
 ```
