@@ -1,14 +1,14 @@
 # Paper portfolio report
 
-Updated: 2026-11-25 21:56 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
+Updated: 2026-11-26 08:47 UTC. **PAPER TRADING with simulated fills on proxy prices. No real money, no real orders.**
 
 ## Total money now: Rs15,000.00
 
 - Based on the last daily close (no fresh live price).
 - Profit / loss: **+Rs0.00 (+0.00%)** since start with Rs15,000
-- Day 12 of 60 (MCX trading days). Data through 2026-11-24.
+- Day 13 of 60 (MCX trading days). Data through 2026-11-25.
 - Closed trades: 0. Costs and tax paid: Rs0.00. Risk vetoes/blocks: 0. Halted: no.
-- Liquid fund would have earned Rs42.08 in the same time. Net after AI cost: +Rs0.00 -> **behind the liquid fund**.
+- Liquid fund would have earned Rs44.71 in the same time. Net after AI cost: +Rs0.00 -> **behind the liquid fund**.
 
 ## Each asset
 
@@ -37,6 +37,7 @@ Updated: 2026-11-25 21:56 UTC. **PAPER TRADING with simulated fills on proxy pri
 | 2026-11-20 | Rs15,000.00 | +Rs0.00 |
 | 2026-11-23 | Rs15,000.00 | +Rs0.00 |
 | 2026-11-24 | Rs15,000.00 | +Rs0.00 |
+| 2026-11-25 | Rs15,000.00 | +Rs0.00 |
 
 ## All trades
 
@@ -56,7 +57,7 @@ No trades yet. Staying in cash is a valid result.
 
 ## Go-live gates (all must pass before any real money)
 
-- FAIL: Paper trading days (need >= 60, have 12)
+- FAIL: Paper trading days (need >= 60, have 13)
 - FAIL: Closed paper trades (need >= 30, have 0)
 - FAIL: Expectancy per trade after costs (need > Rs0, have Rs0)
 - FAIL: Profit factor (need >= 1.3, have None)
@@ -68,9 +69,6 @@ No trades yet. Staying in cash is a valid result.
 
 ## Runner log (last 10 lines)
 ```
-2026-11-24T00:14:08 BTC: 2 new bar(s), at 2026-11-22
-2026-11-24T10:18:13 data: {"GOLDPETAL": 6584, "SILVER100": 6585, "CRUDEOILM": 6592, "BTC": 4451}
-2026-11-24T10:18:14 BTC: 1 new bar(s), at 2026-11-23
 2026-11-24T13:26:59 data: {"GOLDPETAL": 6584, "SILVER100": 6585, "CRUDEOILM": 6592, "BTC": 4451}
 2026-11-24T23:13:38 data: {"GOLDPETAL": 6585, "SILVER100": 6586, "CRUDEOILM": 6593, "BTC": 4451}
 2026-11-24T23:13:39 GOLDPETAL: 1 new bar(s), at 2026-11-24
@@ -78,4 +76,7 @@ No trades yet. Staying in cash is a valid result.
 2026-11-25T09:00:24 BTC: 1 new bar(s), at 2026-11-24
 2026-11-25T12:21:47 data: {"GOLDPETAL": 6585, "SILVER100": 6586, "CRUDEOILM": 6593, "BTC": 4452}
 2026-11-25T21:56:05 data: {"GOLDPETAL": 6585, "SILVER100": 6586, "CRUDEOILM": 6593, "BTC": 4452}
+2026-11-26T08:47:17 data: {"GOLDPETAL": 6586, "SILVER100": 6587, "CRUDEOILM": 6594, "BTC": 4453}
+2026-11-26T08:47:17 GOLDPETAL: 1 new bar(s), at 2026-11-25
+2026-11-26T08:47:17 BTC: 1 new bar(s), at 2026-11-25
 ```
